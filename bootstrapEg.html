@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	  <title>Bootstrap Example</title>
+	  <meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<nav class="navbar navbar-inverse">
+			  <div class="container-fluid">
+			    <div class="navbar-header">
+			      <a class="navbar-brand" href="#">StayUpdated</a>
+			    </div>
+			    <ul class="nav navbar-nav">
+			      <li class="active"><a href="#">Home</a></li>
+			      <li><a href="#">Contact</a></li>
+			    </ul>
+			  </div>
+			</nav>
+			<h3>Stay Updated</h3>
+  			<p>All your problems in one place</p> 
+  			<!-- <>
+  			get
+  			json
+  			loop{
+  			div
+  		}
+  			</> -->
+  			<div id="comContent"> 
+  			<script type="text/javascript">
+  				var l = 0;
+				var offset = 0;
+				var callUI = function(offset, data){
+  					//data = JSON.stringify({"offset":offset})
+;					var xhr = new XMLHttpRequest();
+					// xhr.withCredentials = true;
+
+					xhr.addEventListener("readystatechange", function() {
+					  if(this.readyState === 4) {
+					    // console.log(this.responseText);
+					    var jsonarr = JSON.parse(this.responseText);
+
+					    jsonarr.forEach(function(item){
+					    	//console.log(item);
+					    	var com = '<div class="panel panel-default">\
+			    <div class="panel-heading">'+item.TITLE+'<span class="label label-success">New</span></div>\
+			    <div class="panel-body">\
+			    	<h6><span>'+item.TIME+'</span></h6>\
+			    	<a href = "'+item.LINK+'" target=black><input type="button" class="btn btn-info" value="View"></a>\
+			    </div>\
+		    </div>';
+		    			document.getElementById("comContent").innerHTML += com
+
+					    });
+					    l = jsonarr.length;
+		    			console.log("returned "+ l +" number of row ");
+		    			console.log("jsonarr [0] "+ jsonarr[0].TITLE);
+					  }
+					});
+
+					xhr.open("GET", "http://localhost:8085/ui/get_comp?offset="+offset);
+					xhr.setRequestHeader("Content-Type", "application/json");
+
+					xhr.send(data);
+  				}
+
+  				//document.addEventListener("DOMContentLoaded", function(event) { 
+				//	console.log("page Loaded");
+				do{
+					console.log("call with offset "+ offset);
+					callUI(offset);
+					console.log("return l "+ 0);
+					offset += 10;
+				}
+				while(offset < 50);
+				//});
+
+  			</script>
+  		</div>
+<!--   		<div class="panel panel-default">
+			    <div class="panel-heading">SQL Test <span class="label label-success">New</span></div>
+			    <div class="panel-body">
+			    	<h6><span>Start date: 12/06/2019 </span> <span>End date: 12/08/2019</span> </h6>
+			    	<input type="button" class="btn btn-info" value="View">
+			    </div>
+		    </div>
+		    <div class="panel panel-default">
+			    <div class="panel-heading">HackerRank <span class="label label-success">New</span></div>
+			    <div class="panel-body">
+			    	<h6><span>Start date: 10/06/2019 </span> <span>End date: 15/08/2019</span> </h6>
+			    	<input type="button" class="btn btn-info" value="View">
+			    </div>
+		    </div>
+		    <div class="panel panel-default">
+			    <div class="panel-heading">GeeksForGeeks <span class="label label-success">New</span></div>
+			    <div class="panel-body">
+			    	<h6><span>Start date: 01/06/2019 </span> <span>End date: 29/06/2019</span> </h6>
+			    	<input type="button" class="btn btn-info" value="View">
+			    </div>
+		    </div>
+		    <div class="panel panel-default">
+			    <div class="panel-heading">CodeChef <span class="label label-success">New</span></div>
+			    <div class="panel-body">
+			    	<h6><span>Start date: 12/07/2019 </span> <span>End date: 11/09/2019</span> </h6>
+			    	<input type="button" class="btn btn-info" value="View">
+			    </div>
+		    </div> -->
+            
+			<p id="demo"></p>
+
+			<script>
+			document.getElementById("demo").innerHTML = 
+			"Page hostname is: " + window.location.hostname;
+			</script>
+
+		</div>
+	</body>
+</html>
+	
